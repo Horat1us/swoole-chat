@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Chat</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">`
+</head>
+<body>
+<h1 class="display-2">
+    Horatius.PRO| WS Chat
+</h1>
+<p>
+    <span id="stateLabel">OK</span>;
+</p>
+<script>
+    (() => {
+        const errorElement = document.getElementById('stateLabel');
+        const url = new URL(window.location.toString());
+        url.pathname="/ws/";
+        url.protocol=url.protocol.replace(/^http(s)?/, 'ws$1');
+        const socketUrl = url.toString();
+        var exampleSocket = new WebSocket(socketUrl);
+        exampleSocket.addEventListener("message", (...args) =>{
+            console.log(...args);
+        });
+    })();
+</script>
+</body>
+</html>

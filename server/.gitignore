@@ -1,0 +1,4 @@
+vendor/
+.env
+README.md
+/phpstan.neon export-ignore

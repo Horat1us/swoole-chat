@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  ws_chat_backend:
+    container_name: ws_chat_backend
+    environment:
+      AUTORELOAD_PROGRAMS: "swoole"
+      AUTORELOAD_ANY_FILES: 0
+    build:
+      context: server
+      dockerfile: Dockerfile
+    volumes:
+      - "./server:/var/www/"
+    ports:
+      - 9501:9501
+  ws_chat_nginx:
+    image: nginx:1.19-alpine
+    container_name: ws_chat_nginx
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./client:/usr/src/client
+    ports:
+      - 8090:80
+    depends_on:
+      - ws_chat_backend
+    links:
+      - ws_chat_backend
