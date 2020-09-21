@@ -25,6 +25,7 @@ $http->on(
 
 $http->on('open', function(WebSocket\Server $server, Swoole\Http\Request $request) {
     echo "connection open: {$request->fd}\n";
+    $request->
     $server->tick(1000, function() use ($server, $request) {
         $server->push($request->fd, json_encode(["hello", time()]));
     });
